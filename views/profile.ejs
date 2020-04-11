@@ -1,0 +1,122 @@
+<%- include('partials/header'); -%>
+<%- include('partials/menu'); -%>
+<%- include('partials/image-slider'); -%>
+
+<div class="container content">
+  <div class="row">
+    <div class="col-lg-9 border border-top-0 border-bottom-0 border-left-0" style="min-height: 100vh; padding: 15px;">
+      <div class="container text-center">
+        <div class="p-2" >
+          <div class="avatar-container mx-auto">
+            <% if(avatar === undefined){ %>
+              <img class="profile-avatar" src="/images/main/default-avatar.jpg">
+            <% } else { %>
+              <img class="profile-avatar" src="/images/uploads/<%= avatar[0].filename %>">
+            <% } %>
+          </div>
+        </div>
+        <div class="profile-username">
+          <%= username %>
+          <% if(locals.user && user.username === username){ %>
+          <span class="user-status online"></span>
+          <% } else { %>
+          <span class="user-status"></span>
+          <% }%>
+        </div>
+        <script>
+          $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+          });
+        </script>
+        <nav class="navbar navbar-expand-lg menu-navbar">
+          <div class="user-navbar m-auto text-center">
+            <ul class="navbar-nav text-white">
+              <li class="nav-item">
+                <a class="nav-link" href="/users/profile/<%= username %>" data-toggle="tooltip" data-placement="bottom" title="За мен">
+                  <img style="width: 50px" class="px-2" src="/images/main/about-me.png">
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/users/comments/<%= username %>" data-toggle="tooltip" data-placement="bottom" title="Коментари">
+                  <img style="width: 50px" class="px-2" src="/images/main/comments.png">
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/users/ratings/<%= username %>" data-toggle="tooltip" data-placement="bottom" title="Гласове">
+                  <img style="width: 50px" class="px-2" src="/images/main/rating.png">
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="tooltip" data-placement="bottom" title="Приятели">
+                  <img style="width: 50px" class="px-2" src="/images/main/friends.png">
+                </a>
+              </li>
+
+              <% if(locals.user && user.username === username){ %>
+                <li class="nav-item">
+                  <a class="nav-link" href="/users/settings/<%= username %>" data-toggle="tooltip" data-placement="bottom" title="Настройки">
+                    <img style="width: 50px" class="px-2" src="/images/main/settings.png">
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/users/logout" data-toggle="tooltip" data-placement="bottom" title="Изход">
+                    <img style="width: 50px" class="px-2" src="/images/main/logout.png">
+                  </a>
+                </li>
+              <% } %>
+            </ul>
+          </div>
+        </nav>
+        <div class="container text-left" style="width: 500px;">
+          <% if(name !== undefined) { %>
+            <% if(name !== "") { %>
+            <div class="my-2">
+              <div class="border-bottom">
+                <img style="width: 20px" class="py-1" src="/images/main/name.png">
+                <span class="font-weight-bold">Име</span>
+              </div>
+              <span><%= name %></span>
+            </div>
+            <% } %>
+          <% } %>
+          <% if(gender !== undefined) { %>
+            <% if (gender !== null) { %>
+              <div class="my-2">
+                <div class="border-bottom">
+                  <img style="width: 20px" class="py-1" src="/images/main/gender.png">
+                  <span class="font-weight-bold">Пол</span>
+                </div>
+                <span><%= gender %></span>
+              </div>
+            <% } %>
+          <% } %>
+          <% if(dateOfBirth !== undefined) { %>
+            <% if(dateOfBirth !== null) { %>
+              <div class="my-2">
+                <div class="border-bottom">
+                  <img style="width: 20px" class="py-1" src="/images/main/age.png">
+                  <span class="font-weight-bold">Години</span>
+                </div>
+                <span><%= parseInt((Date.now() - dateOfBirth)/(1000*60*60*24*365)) %></span>
+              </div>
+            <% } %>
+          <% } %>
+          <% if(more_info !== undefined) { %>
+            <% if(more_info !== "") { %>
+              <div class="my-2">
+                <div class="border-bottom">
+                  <img style="width: 20px" class="py-1" src="/images/main/more-info.png">
+                  <span class="font-weight-bold">Описание</span>
+                </div>
+                <span><%= more_info %></span>
+              </div>
+            <% } %>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <%- include('partials/side-content') %>
+  </div>
+</div>
+<br>
+<%- include('partials/footer'); -%>

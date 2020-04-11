@@ -1,0 +1,104 @@
+<%- include('partials/header'); -%>
+<%- include('partials/menu'); -%>
+<%- include('partials/image-slider') %>
+
+ <div class="container content">
+   <div class="row">
+     <div class="col-lg-9 border border-top-0 border-bottom-0 border-left-0" style="min-height: 100vh; padding: 15px;">
+      <%- messages('message', locals) %>
+       <% projects.forEach(function(project){ %>
+         <div class="d-inline-block">
+           <div class="project d-flex">
+             <img class="output-project" src="/images/uploads/<%= project.projectRef.image_file[0].filename %>">
+             <span class="text-caption position-absolute text-light bg-danger px-1">МАНГА</span>
+             <div class="project-overlay">
+               <a href="/manga/<%= project.projectRef._id %>">
+                 <img style="width: 35px" src="/images/main/link.png">
+               </a>
+             </div>
+           </div>
+           <div class="container">
+           <% if (project.projectRef.title.length < 13) { %>
+             <span class="font-weight-bold small">
+               <a class="project-title" href="/manga/<%= project.projectRef._id %>"><%= project.projectRef.title.toUpperCase() %></a>
+             </span>
+           <% } else { %>
+             <span class="font-weight-bold small"><%= project.projectRef.title.toUpperCase().substr(0,12) %>...</span>
+           <% } %>
+            <div class="d-inline float-right">
+             <img style="width: 12px" class="" src="/images/main/rating-dark.png">
+             <% let sumRatings = 0 %>
+             <% let count = 0 %>
+             <% ratings.forEach((rating) => { %>
+               <% if(rating.projectId == project.projectRef.id) { %>
+                 <% sumRatings += rating.rating %>
+                 <% count++ %>
+               <% } %>
+             <% }) %>
+             <% if (sumRatings == 0) { %>
+               <span class="font-weight-bold small">n/a</span>
+             <% } else { %>
+               <span class="font-weight-bold small"><%= sumRatings/count %></span>
+             <% } %>
+             <img style="width: 12px" class="" src="/images/main/comments-dark.png">
+             <% let countComments = 0; %>
+             <% comments.forEach((comment) => { %>
+               <% if (comment.projectId == project.projectRef.id) { %>
+                 <% countComments++ %>
+               <% } %>
+             <% }) %>
+             <span class="font-weight-bold small"><%= countComments %></span>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+       <ul class="pagination justify-content-center">
+         <% if (pages > 0) { %>
+           <% if (current == 1) { %>
+              <li class="page-item disabled">
+               <a class="page-link" style="pointer-events: none;">Първа</a>
+              </li>
+           <% } else { %>
+              <li class="page-item">
+                <a class="page-link">Първа</a>
+              </li>
+           <% } %>
+           <% let i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+           <% if (i !== 1) { %>
+              <li class="page-item">
+                <a class="page-link" style="pointer-events: none;">...</a>
+              </li>
+           <% } %>
+           <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+             <% if (i == current) { %>
+               <li class="page-item active">
+                 <a class="page-link active"><%= i %></a>
+               </li>
+             <% } else { %>
+               <li class="page-item">
+                 <a class="page-link" href="/page-<%= + i %>"><%= i %></a>
+               </li>
+             <% } %>
+             <% if (i == Number(current) + 4 && i < pages) { %>
+                <li>
+                  <a class="page-link" style="pointer-events: none;">...</a>
+                </li>
+             <% } %>
+           <% } %>
+           <% if (current == pages) { %>
+              <li class="page-item disabled">
+                <a class="page-link" style="pointer-events: none;">Последна</a>
+              </li>
+           <% } else { %>
+              <li class="page-item">
+                <a class="page-link" href="/page-<%= pages %>">Последна</a>
+              </li>
+           <% } %>
+         <% } %>
+       </ul>
+     </div>
+     <%- include('partials/side-content') -%>
+   </div>
+ </div>
+ <br>
+<%- include('partials/footer'); -%>

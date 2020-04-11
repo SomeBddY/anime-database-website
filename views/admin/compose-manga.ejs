@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="bg" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="/images/main/OtakuBG.png">
+    <link rel="stylesheet" type="text/css" href="/css/adm-panel.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    <title>Качи нов проект</title>
+  </head>
+  <body>
+    <img class="logo" src="/images/main/OtakuBGBanner.png">
+    <div class="container">
+      <nav class=" navbar-expand-lg menu-navbar">
+        <div class="text-center">
+          <ul class="navbar-nav nav nav-tabs">
+            <li class="nav-item"><a class="nav-link" href="/admin-panel">НАЧАЛО</a></li>
+            <li style="cursor: pointer" class="nav-item">
+              <a class="nav-link active dropdown-toggle" data-toggle="dropdown" >КАЧИ</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="/admin-panel/compose-anime">Аниме</a>
+                <a class="dropdown-item" href="/admin-panel/compose-manga">Манга</a>
+                <a class="dropdown-item" href="/admin-panel/compose-liveaction">Игрален</a>
+                <a class="dropdown-item" href="/admin-panel/compose-game">Игра</a>
+              </div>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">РЕДАКТИРАЙ</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">ИЗТРИЙ</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <img class="import" src="/images/main/import.png">
+      <form action="/admin-panel/compose-manga" method="post" enctype="multipart/form-data">
+        <label>Постер:</label>
+        <input type="file" name="file" accept="image/*" onchange="loadFile(event)">
+        <img class="output-image" id="output">
+        <script>
+          var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+          };
+        </script>
+        <label>Заглавие:</label>
+        <input type="text" name="title">
+        <label>Жанр:</label>
+        <select name="genres">
+          <option  selected disabled hidden>Избери жанр</option>
+          <% genresEnum.forEach(function(everyGenre) { %>
+            <option value="<%= everyGenre %>"><%= everyGenre %></option>
+          <% }) %>
+        </select>
+        <select name="genres">
+          <option  selected disabled hidden>Избери жанр</option>
+          <% genresEnum.forEach(function(everyGenre) { %>
+            <option value="<%= everyGenre %>"><%= everyGenre %></option>
+          <% }) %>
+        </select>
+        <select name="genres">
+          <option  selected disabled hidden>Избери жанр</option>
+          <% genresEnum.forEach(function(everyGenre) { %>
+            <option value="<%= everyGenre %>"><%= everyGenre %></option>
+          <% }) %>
+        </select>
+        <select name="genres">
+          <option  selected disabled hidden>Избери жанр</option>
+          <% genresEnum.forEach(function(everyGenre) { %>
+            <option value="<%= everyGenre %>"><%= everyGenre %></option>
+          <% }) %>
+        </select>
+        <label>Глави:</label>
+        <input type="text" name="chapters">
+        <label>Томове:</label>
+        <input type="text" name="volumes">
+        <label>Година:</label>
+        <input type="text" name="year">
+        <label>Държава:</label>
+        <input type="text" name="state">
+        <label>Автор:</label>
+        <input type="text" name="author">
+        <label>Описание:</label>
+        <textarea name="summary" rows="10" cols="70"></textarea>
+        <br>
+        <button type="submit" name="button">ПУБЛИКУВАЙ</button>
+      </form>
+    </div>
+  </body>
+</html>

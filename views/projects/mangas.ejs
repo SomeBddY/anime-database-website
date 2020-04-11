@@ -1,0 +1,167 @@
+<%- include('partials/header'); -%>
+<%- include('partials/menu'); -%>
+<%- include('partials/image-slider'); -%>
+
+    <div class="container-md content clearfix">
+      <div class="row">
+        <div class="col-lg-9 border border-top-0 border-bottom-0 border-left-0" style="min-height: 100vh; padding: 15px;">
+          <table class="table project-description">
+            <tr>
+              <td width="33%" rowspan="9">
+                <img class="output-single-project" src="/images/uploads/<%= image_file %>">
+              </td>
+            </tr>
+            <tr>
+              <th>Заглавие</th>
+              <td><%= title %></td>
+            </tr>
+            <tr>
+              <th>Жанр</th>
+              <td><%= genres %></td>
+            </tr>
+            <tr>
+              <th>Глави</th>
+              <td><%= chapters %></td>
+            </tr>
+            <tr>
+              <th>Томове</th>
+              <td><%= volumes %></td>
+            </tr>
+            <tr>
+              <th>Година</th>
+              <td><%= year %></td>
+            </tr>
+            <tr>
+              <th>Държава</th>
+              <td><%= state %></td>
+            </tr>
+            <tr>
+              <th>Автор</th>
+              <td><%= author %></td>
+            </tr>
+            <tr>
+              <th>Рейтинг</th>
+              <td style="border-bottom: none">
+                <form action="/manga/<%= mangaId %>" method="post">
+                  <% if(ratings.length === 0){ %>
+                    <span>n/a</span>
+                  <% } else { %>
+                    <% let sumVotes = 0 %>
+                    <% ratings.forEach(function(vote) { %>
+                      <% sumVotes += vote.rating %>
+                    <% }) %>
+                    <span><%= (sumVotes/count).toFixed(2) %></span>
+                    <span>(<%= count %>)</span>
+                  <% } %>
+                  <% if(locals.user) { %>
+                  <select id="select-rating" name="rating">
+                    <option value="0" selected disabled hidden>Избери оценка</option>
+                    <option value="1">(1)Ужас</option>
+                    <option value="2">(2)Много слабо</option>
+                    <option value="3">(3)Зле</option>
+                    <option value="4">(4)Бива</option>
+                    <option value="5">(5)Средно</option>
+                    <option value="6">(6)Добро</option>
+                    <option value="7">(7)Много добро</option>
+                    <option value="8">(8)Супер</option>
+                    <option value="9">(9)Жестоко</option>
+                    <option value="10">(10)Шедьовър</option>
+                  </select>
+                  <input id="rate-btn" class="btn btn-sm btn-dark" type="submit" value="Гласувай">
+                  <% } %>
+                </form>
+              </td>
+            </tr>
+            <tr>
+              <th colspan="3" style="text-align: center">Резюме</th>
+            </tr>
+            <tr>
+              <td colspan="3"><p style="white-space: pre-wrap"><%= summary %></p></td>
+            </tr>
+          </table>
+          <br>
+          <div class="text-center">
+            <% if(locals.user && locals.user.role === 'admin'){ %>
+              <a class="btn btn-light" href="/manga/edit/<%= mangaId %>">Редактирай</a>
+              <form style="display: initial !important" method="POST" action="/images/uploads/<%= image_file %>?_method=DELETE">
+                <button class="btn btn-danger delete-manga" data-id=<%= mangaId %>>Изтрий</button>
+              </form>
+            <% } %>
+          </div>
+          <div class="container my-3">
+            <div class="text-center">
+              <img class="bg-warning my-1 p-2 rounded d-inline" style="width: 35px;" class="px-2" src="/images/main/comments.png">
+              <h4 class="font-weight-bold d-inline align-middle">КОМЕНТАРИ</h4>
+            </div>
+            <% if(locals.user) { %>
+              <div class="text-center p-1">
+                <form class="form-group" action="/manga/<%= mangaId %>" method="post">
+                  <textarea style="resize: none" class="form-control" name="comment" contenteditable="true" placeholder="Публикувай коментар..."></textarea>
+                  <input class="btn btn-sm btn-primary my-1" type="submit" value="Добави коментар">
+                </form>
+              </div>
+            <% } %>
+            <div class="">
+              <% comments.forEach(function(comment) { %>
+                <div class="container my-3">
+                  <div>
+                    <div class="d-inline">
+                      <% if (comment.userId.avatar[0] === undefined) { %>
+                        <img class="comment-avatar" src="/images/main/default-avatar.jpg">
+                      <% } else { %>
+                        <img class="comment-avatar" src="/images/uploads/<%= comment.userId.avatar[0].filename %>">
+                      <% } %>
+                    </div>
+                    <div class="d-inline-block align-middle">
+                      <span class="d-block"><%= comment.userId.username %></span>
+                      <span class="d-block small">
+                        <% let whenComment = new Date(Date.now() - comment.date) %>
+                        <% if(whenComment/1000 < 60) { %>
+                          <span>преди <%= parseInt(whenComment.getSeconds()) %> секунди</span>
+                        <% } else if(whenComment/(1000*60) < 60) { %>
+                          преди <%= parseInt(whenComment/(1000*60)) %>
+                          <% if(parseInt(whenComment/(1000*60)) == 1) { %>
+                            минута
+                          <% } else { %>
+                            минути
+                          <% } %>
+                        <% } else if(whenComment/(1000*60*60) < 24) { %>
+                          преди <%= parseInt(whenComment/(1000*60*60)) %>
+                          <% if(parseInt(whenComment/(1000*60*60)) == 1) { %>
+                            час
+                          <% } else { %>
+                            часа
+                          <% } %>
+                        <% } else if(whenComment/(1000*60*60*24) < 7) { %>
+                          преди <%= parseInt(whenComment/(1000*60*60*24)) %>
+                          <% if(parseInt(whenComment/(1000*60*60*24)) == 1) { %>
+                            ден
+                          <% } else { %>
+                            дена
+                          <% } %>
+                        <% } else if(whenComment/(1000*60*60*24*7) < 5) { %>
+                          преди <%= parseInt(whenComment/(1000*60*60*24*7)) %>
+                          <% if(parseInt(whenComment/(1000*60*60*24*7)) == 1) { %>
+                            седмица
+                          <% } else { %>
+                            седмици
+                          <% } %>
+                        <% } else { %>
+                          <%= comment.date.toISOString().substr(0,10) %> <%= comment.date.toString().substr(16,5) %>
+                        <% } %>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="container bg-light my-1 p-2">
+                    <p style="word-wrap: break-word"><%= comment.comment %></p>
+                  </div>
+                </div>
+              <% }) %>
+            </div>
+          </div>
+        </div>
+        <%- include('partials/side-content') -%>
+      </div>
+    </div>
+    <br>
+<%- include('partials/footer'); -%>

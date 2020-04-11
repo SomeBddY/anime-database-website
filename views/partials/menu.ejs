@@ -1,0 +1,68 @@
+    <div class="container-fluid" style="background-color: white">
+      <div class="container navbar">
+        <div class="">
+          <a href="https://www.facebook.com/otakubg/"><img class="img-fluid img-responsive" style="width: 35px" src="/images/main/facebook-logo.png"></a>
+          <a href="https://discord.gg/d8BHQyn"><img class="img-responsive" style="width: 35px" src="/images/main/discord-logo.png"></a>
+        </div>
+        <div class="">
+          <a href="/"><img class="img-responsive" src="/images/main/OtakuBGBanner.png" style="width: 150px"></a>
+        </div>
+          <div class="user-menu">
+            <% if(locals.user){ %>
+              <div class="menu-username-container my-auto">
+                <a class="menu-username " href="/users/profile/<%= user.username %>"><%= user.username.toUpperCase() %>&nbsp</a>
+              </div>
+              <% if(user.avatar === undefined){ %>
+                <div class="menu-avatar-container">
+                  <img class="menu-avatar" src="/images/main/default-avatar.jpg">
+                </div>
+              <% } else { %>
+                <div class="menu-avatar-container">
+                  <img class="menu-avatar" src="/images/uploads/<%= user.avatar[0].filename %>">
+                </div>
+              <% } %>
+            <% } else { %>
+              <a class="btn btn-outline-dark" href="/users/login">Вход</a>&nbsp
+              <a class="btn btn-outline-dark" href="/users/register">Регистрация</a>
+            <% } %>
+          </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-lg menu-navbar">
+      <div class="m-auto text-center">
+        <ul class="navbar-nav text-white">
+          <li class="nav-item"><a class="nav-link" href="/">НАЧАЛО</a></li>
+          <li class="nav-item"><a class="nav-link" href="/anime">АНИМЕ</a></li>
+          <li class="nav-item"><a class="nav-link" href="/manga">МАНГА</a></li>
+          <li class="nav-item"><a class="nav-link" href="/liveaction">ИГРАЛНИ</a></li>
+          <li class="nav-item"><a class="nav-link" href="/game">ИГРИ</a></li>
+          <li class="nav-item drpdwn" style="cursor: context-menu">
+            <a class="nav-link dropdown-toggle">СТАТИСТИКА</a>
+            <div class="drpdwn-menu">
+              <a class="dropdown-item" href="#">Най-оценявани</a>
+              <a class="dropdown-item" href="#">Най-преглеждани</a>
+              <a class="dropdown-item" href="#">Най-коментирани</a>
+            </div>
+          </li>
+          <li class="nav-item drpdwn" style="cursor: context-menu">
+            <a class="nav-link dropdown-toggle">ОЩЕ</a>
+            <div class="drpdwn-menu">
+              <a class="dropdown-item" href="#">Гледай онлайн</a>
+              <a class="dropdown-item" href="#">Манга онлайн</a>
+              <a class="dropdown-item" href="#">Форум</a>
+            </div>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#">ЕКИП</a></li>
+          <li class="nav-item"></li>
+          <li class="nav-item">
+            <form class="input-group ml-5 mt-1" action="">
+              <input class="form-control border-0" type="text" placeholder="Търсене..." name="search">
+              <span class="input-group-btn">
+                <button class="btn btn-dark text-light" type="submit"><i class="fa fa-search"></i></button>
+              </span>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <br />

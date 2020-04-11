@@ -1,0 +1,53 @@
+<div class="col-lg-3">
+  <div class="container my-3">
+    <div class="text-center side-content py-2 text-light font-weight-bold">
+      <span>Последни коментари</span>
+    </div>
+    <div class="arrow-down m-auto"></div>
+    <% if(locals.globalComments) { %>
+      <% locals.globalComments.forEach((comment) => { %>
+        <div class="my-3 border-bottom">
+          <div class="d-inline-block">
+            <% if (comment.userId.avatar === undefined) { %>
+              <img class="comment-avatar" src="/images/main/default-avatar.jpg">
+            <% } else { %>
+              <img class="comment-avatar" src="/images/uploads/<%= comment.userId.avatar[0].filename %>">
+            <% } %>
+          </div>
+          <a class="comment-username font-weight-bold" href="/users/profile/<%= comment.userId.username %>">
+            <%= comment.userId.username %>
+          </a>
+          <div class="arrow-up mt-1 ml-3"></div>
+          <span style="word-wrap: break-word" class="d-block bg-light mb-3 p-2">
+            <%= comment.comment.substr(0,25) %>...
+            <a class="small comment-more"href="/animes/<%= comment.animeId %>">(Виж още)</a>
+          </span>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
+  <script>
+    $(document).ready(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
+  <div class="container my-3">
+    <div class="text-center side-content py-2 text-light font-weight-bold">
+      <span>На линия</span>
+    </div>
+    <div class="arrow-down m-auto"></div>
+    <div class="text-center my-2">
+      <% if(locals.user) { %>
+        <div class="d-inline-block m-1">
+          <a style="text-decoration: none" href="/users/profile/<%= user.username %>" data-toggle="tooltip" data-placement="bottom" title="<%= user.username %>">
+            <% if(user.avatar === undefined){ %>
+              <img class="comment-avatar" src="/images/main/default-avatar.jpg">
+            <% } else { %>
+              <img class="comment-avatar" src="/images/uploads/<%= user.avatar[0].filename %>">
+            <% } %>
+          </a>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</div>

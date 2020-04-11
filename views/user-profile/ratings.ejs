@@ -1,0 +1,117 @@
+<%- include('partials/header'); -%>
+<%- include('partials/menu'); -%>
+<%- include('partials/image-slider'); -%>
+
+<div class="container content">
+  <div class="row">
+    <div class="col-lg-9 border border-top-0 border-bottom-0 border-left-0" style="min-height: 100vh; padding: 15px;">
+      <div class="containe text-center">
+        <div class="p-2" >
+          <div class="avatar-container mx-auto">
+            <% if(avatar === undefined){ %>
+              <img class="profile-avatar" src="/images/main/default-avatar.jpg">
+            <% } else { %>
+              <img class="profile-avatar" src="/images/uploads/<%= avatar[0].filename %>">
+            <% } %>
+          </div>
+        </div>
+        <div class="profile-username text-center">
+          <%= username %>
+          <% if(locals.user && user.username === username){ %>
+          <span class="user-status online"></span>
+          <% } else { %>
+          <span class="user-status"></span>
+          <% }%>
+        </div>
+        <script>
+          $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+          });
+        </script>
+        <nav class="navbar navbar-expand-lg menu-navbar">
+          <div class="user-navbar m-auto text-center">
+            <ul class="navbar-nav text-white">
+              <li class="nav-item">
+                <a class="nav-link" href="/users/profile/<%= username %>" data-toggle="tooltip" data-placement="bottom" title="За мен">
+                  <img style="width: 50px" class="px-2" src="/images/main/about-me.png">
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/users/comments/<%= username %>" data-toggle="tooltip" data-placement="bottom" title="Коментари">
+                  <img style="width: 50px" class="px-2" src="/images/main/comments.png">
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/users/ratings/<%= username %>" data-toggle="tooltip" data-placement="bottom" title="Гласове">
+                  <img style="width: 50px" class="px-2" src="/images/main/rating.png">
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="tooltip" data-placement="bottom" title="Приятели">
+                  <img style="width: 50px" class="px-2" src="/images/main/friends.png">
+                </a>
+              </li>
+
+              <% if(locals.user && user.username === username){ %>
+                <li class="nav-item">
+                  <a class="nav-link" href="/users/settings/<%= username %>" data-toggle="tooltip" data-placement="bottom" title="Настройки">
+                    <img style="width: 50px" class="px-2" src="/images/main/settings.png">
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/users/logout" data-toggle="tooltip" data-placement="bottom" title="Изход">
+                    <img style="width: 50px" class="px-2" src="/images/main/logout.png">
+                  </a>
+                </li>
+              <% } %>
+            </ul>
+          </div>
+        </nav>
+        <div class="container">
+          <table class="table border my-2">
+            <tr class=" table-bordered">
+              <th>Постер</th>
+              <th>Заглавие</th>
+              <th>Тип</th>
+              <th>Оценка</th>
+            </tr>
+              <% locals.projects.forEach(function(project) { %>
+                <% ratings.forEach(function(vote) { %>
+                  <% if(project.projectRef.id == vote.projectId) { %>
+                    <tr>
+                      <td>
+                        <img style="width: 70px" src="/images/uploads/<%= project.projectRef.image_file[0].filename %>">
+                      </td>
+                      <td class="align-middle">
+                        <div class="d-inline font-weight-bold">
+                          <a class="project-title" href="/<%= project.typeOfModel.toLowerCase() %>/<%= project.projectRef.id %>"><%= project.projectRef.title %></a>
+                        </div>
+                      </td>
+                    <br>
+                    <td class="align-middle">
+                      <% if(project.typeOfModel == 'Anime') { %>
+                        <span>Аниме</span>
+                      <% } else if(project.typeOfModel == 'Manga') { %>
+                        <span>Манга</span>
+                      <% } else if(project.typeOfModel == Livection) { %>
+                        <span>Игрален</span>
+                      <% } else { %>
+                        <span>Игра</span>
+                      <% } %>
+                    </td>
+                    <td class="align-middle">
+                      <span><%= vote.rating %></span>
+                    </td>
+                  </tr>
+                <% } %>
+              <% }) %>
+            <% }) %>
+          </table>
+        </div>
+      </div>
+    </div>
+    <%- include('partials/side-content') -%>
+  </div>
+</div>
+<br>
+<%- include('partials/footer'); -%>

@@ -1,0 +1,143 @@
+<%- include('partials/header'); -%>
+<%- include('partials/menu'); -%>
+<%- include('partials/image-slider'); -%>
+
+<div class="container content">
+  <div class="row">
+    <div class="col-lg-9 border border-top-0 border-bottom-0 border-left-0" style="min-height: 100vh; padding: 15px;">
+      <div class="container text-center">
+        <form class="form-group" action="/users/settings/<%= username %>" method="post" enctype="multipart/form-data">
+          <div class="p-2" style="position: relative">
+            <div class="avatar-container mx-auto">
+              <div class="edit-img-btn">
+                <input type="file" name="file" id="getFile" style="display: none" onchange="loadFile(event)">
+                <a onclick="document.getElementById('getFile').click()">▲</a>
+              </div>
+              <% if(avatar === undefined){ %>
+                <img class="profile-avatar" name="outputImage" id="output" src="/images/main/default-avatar.jpg">
+              <% } else { %>
+                <img class="profile-avatar" name="outputImage" id="output" src="/images/uploads/<%= avatar[0].filename %>">
+              <% } %>
+            </div>
+          </div>
+
+          <script>
+            var loadFile = function(event) {
+            var output = document.getElementById('output');
+              output.src = URL.createObjectURL(event.target.files[0]);
+            };
+          </script>
+
+          <div class="profile-username">
+            <%= username %>
+            <% if(locals.user && user.username === username){ %>
+            <span class="user-status online"></span>
+            <% } else { %>
+            <span class="user-status"></span>
+            <% }%>
+          </div>
+          <script>
+            $(document).ready(function () {
+              $('[data-toggle="tooltip"]').tooltip();
+            });
+          </script>
+          <nav class="navbar navbar-expand-lg menu-navbar">
+            <div class="user-navbar m-auto text-center">
+              <ul class="navbar-nav text-white">
+                <li class="nav-item">
+                  <a class="nav-link" href="/users/profile/<%= username %>" data-toggle="tooltip" data-placement="bottom" title="За мен">
+                    <img style="width: 50px" class="px-2" src="/images/main/about-me.png">
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/users/comments/<%= username %>" data-toggle="tooltip" data-placement="bottom" title="Коментари">
+                    <img style="width: 50px" class="px-2" src="/images/main/comments.png">
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/users/ratings/<%= username %>" data-toggle="tooltip" data-placement="bottom" title="Гласове">
+                    <img style="width: 50px" class="px-2" src="/images/main/rating.png">
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#" data-toggle="tooltip" data-placement="bottom" title="Приятели">
+                    <img style="width: 50px" class="px-2" src="/images/main/friends.png">
+                  </a>
+                </li>
+
+                <% if(locals.user && user.username === username){ %>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/users/settings/<%= username %>" data-toggle="tooltip" data-placement="bottom" title="Настройки">
+                      <img style="width: 50px" class="px-2" src="/images/main/settings.png">
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/users/logout" data-toggle="tooltip" data-placement="bottom" title="Изход">
+                      <img style="width: 50px" class="px-2" src="/images/main/logout.png">
+                    </a>
+                  </li>
+                <% } %>
+              </ul>
+            </div>
+          </nav>
+          <br>
+          <div class="container text-left" style="width: 500px;">
+            <div class="">
+              <div class="border-bottom my-2">
+                <img style="width: 20px" class="py-1" src="/images/main/name.png">
+                <span class="font-weight-bold">Име</span>
+              </div>
+              <input class="form-control form-control-sm" type="text" name="name" value="<%= name %>">
+            </div>
+            <div class="">
+              <div class="border-bottom my-2">
+                <img style="width: 20px" class="py-1" src="/images/main/gender.png">
+                <span class="font-weight-bold">Пол</span>
+              </div>
+              <div class="text-center">
+                <label>Мъж</label>
+                <% if(gender == "Мъж"){ %>
+                  <input class="mr-5" type="radio" name="gender" value="Мъж" checked>
+                <% } else { %>
+                  <input class="mr-5" type="radio" name="gender" value="Мъж">
+                <% } %>
+                <label class="ml-5">Жена</label>
+                <% if(gender == "Жена"){ %>
+                  <input class="mr-5" type="radio" name="gender" value="Жена" checked>
+                <% } else { %>
+                  <input class="mr-5" type="radio" name="gender" value="Жена">
+                <% } %>
+              </div>
+            </div>
+            <div class="">
+              <div class="border-bottom my-2">
+                <img style="width: 20px" class="py-1" src="/images/main/age.png">
+                <span class="font-weight-bold">Дата на раждане</span>
+              </div>
+              <% if(dateOfBirth === undefined || dateOfBirth === null){ %>
+                <input class="form-control" type="date" name="dateOfBirth" value="<%= dateOfBirth %>">
+              <% } else { %>
+                <input class="form-control" type="date" name="dateOfBirth" value="<%= dateOfBirth.toISOString().substr(0,10) %>">
+              <% } %>
+            </div>
+            <br>
+            <div class="my-2">
+              <div class="border-bottom">
+                <img style="width: 20px" class="py-1" src="/images/main/more-info.png">
+                <span class="font-weight-bold">Описание</span>
+              </div>
+              <textarea class="form-control" type="text" name="more_info" value="<%= more_info %>"><%= more_info %></textarea>
+            </div>
+            <div class="text-center my-2">
+              <button class="btn btn-primary" type="submit">Потвърди</button>
+              <button class="btn btn-secondary" type="button" onclick="location.replace('/users/profile/<%= username %>')">Отмяна</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <%- include('partials/side-content') -%>
+  </div>
+</div>
+<br>
+<%- include('partials/footer'); -%>

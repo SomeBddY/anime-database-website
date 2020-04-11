@@ -1,0 +1,102 @@
+<%- include('partials/header'); -%>
+<%- include('partials/menu'); -%>
+<%- include('partials/image-slider'); -%>
+
+<div class="container content">
+  <div class="row">
+    <div class="col-lg-9 border border-top-0 border-bottom-0 border-left-0" style="min-height: 100vh; padding: 15px;">
+      <div class="container text-center">
+        <div class="p-2" >
+          <div class="avatar-container mx-auto">
+            <% if(avatar === undefined){ %>
+              <img class="profile-avatar" src="/images/main/default-avatar.jpg">
+            <% } else { %>
+              <img class="profile-avatar" src="/images/uploads/<%= avatar[0].filename %>">
+            <% } %>
+          </div>
+        </div>
+        <div class="profile-username">
+          <%= username %>
+          <% if(locals.user && user.username === username){ %>
+          <span class="user-status online"></span>
+          <% } else { %>
+          <span class="user-status"></span>
+          <% }%>
+        </div>
+        <script>
+          $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+          });
+        </script>
+        <nav class="navbar navbar-expand-lg menu-navbar">
+          <div class="user-navbar m-auto text-center">
+            <ul class="navbar-nav text-white">
+              <li class="nav-item">
+                <a class="nav-link" href="/users/profile/<%= username %>" data-toggle="tooltip" data-placement="bottom" title="За мен">
+                  <img style="width: 50px" class="px-2" src="/images/main/about-me.png">
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/users/comments/<%= username %>" data-toggle="tooltip" data-placement="bottom" title="Коментари">
+                  <img style="width: 50px" class="px-2" src="/images/main/comments.png">
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/users/ratings/<%= username %>" data-toggle="tooltip" data-placement="bottom" title="Гласове">
+                  <img style="width: 50px" class="px-2" src="/images/main/rating.png">
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="tooltip" data-placement="bottom" title="Приятели">
+                  <img style="width: 50px" class="px-2" src="/images/main/friends.png">
+                </a>
+              </li>
+
+              <% if(locals.user && user.username === username){ %>
+                <li class="nav-item">
+                  <a class="nav-link" href="/users/settings/<%= username %>" data-toggle="tooltip" data-placement="bottom" title="Настройки">
+                    <img style="width: 50px" class="px-2" src="/images/main/settings.png">
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/users/logout" data-toggle="tooltip" data-placement="bottom" title="Изход">
+                    <img style="width: 50px" class="px-2" src="/images/main/logout.png">
+                  </a>
+                </li>
+              <% } %>
+            </ul>
+          </div>
+        </nav>
+        <div class="container my-2">
+        <% comments.forEach((comment) => { %>
+          <% projects.forEach((project) => { %>
+            <% if (project.projectRef.id == comment.projectId) { %>
+              <div class="border text-left my-2">
+                <div class="d-inline-block">
+                  <img style="width: 70px" class="px-2" src="/images/uploads/<%= project.projectRef.image_file[0].filename %>">
+                </div>
+                <div class="d-inline-block">
+                  <a class="project-title font-weight-bold" href="/projects/<%= project.projectRef.id %>"><%= project.projectRef.title %></a>
+                  <span class="small">
+                    <%= comment.date.toISOString().substr(0,10) %>
+                    <%= comment.date.toString().substr(16,5) %>
+                  </span>
+                  <div class="container bg-light my-1 p-2">
+                    <p style="word-wrap: break-word">
+                      <%= comment.comment.substr(0,60) %>...
+                      <a href="/<%= project.typeOfModel.toLowerCase() %>/<%= project.projectRef.id %>"">(Виж повече)</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            <% } %>
+          <% }) %>
+        <% }) %>
+        </div>
+      </div>
+    </div>
+    <%- include('partials/side-content') -%>
+  </div>
+</div>
+<br>
+<%- include('partials/footer'); -%>

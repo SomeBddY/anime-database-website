@@ -1,0 +1,95 @@
+html, body {
+  background-image: url("/images/main/background1.jpg");
+}
+
+.logo{
+  display: block;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;;
+}
+
+.import{
+  display: block;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+}
+
+.output-image {
+  width: 420px;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container {
+  position: relative;
+  margin: auto;
+  padding: 10px;
+  background-color: white;
+  width: 700px;
+  height: auto;
+  border: 1px solid #ccc;
+}
+
+.container label, input, textarea, select {
+  display: block;
+  margin: 5px 0;
+  clear: right;
+  width: 100%;
+  box-sizing: border-box;
+
+  font-family: Roboto, sans-serif;
+}
+
+.container select {
+  display: inline-block;
+  width: auto;
+  margin: 5px  5px;
+}
+
+.container input[type=text], textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+
+.container button {
+  display: block;
+  margin: auto;
+  background-color: #006bb3;
+  color: white;
+  width: 130px;
+  padding: 15px;
+  transition: 0.5s;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+}
+
+.container button:hover {
+
+    background-color: #004d80;
+}
+
+.container textarea {
+  resize: none;
+}
+
+.container input:focus, textarea:focus {
+  outline: none;
+}
+
+.profile-avatar {
+  margin: auto;
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 50%;
+}

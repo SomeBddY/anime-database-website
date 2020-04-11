@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="bg" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="/images/main/OtakuBGLogo.png">
+    <link rel="stylesheet" type="text/css" href="/css/adm-panel.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    <title>Качи нов проект</title>
+  </head>
+
+  <body>
+    <img class="logo" src="/images/main/OtakuBGBanner.png">
+    <div class="container">
+      <nav class=" navbar-expand-lg menu-navbar">
+        <div class="text-center">
+          <ul class="navbar-nav nav nav-tabs">
+            <li class="nav-item"><a class="nav-link active" href="/admin-panel">НАЧАЛО</a></li>
+            <li style="cursor: pointer" class="nav-item">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" >КАЧИ</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="/admin-panel/compose-anime">Аниме</a>
+                <a class="dropdown-item" href="/admin-panel/compose-manga">Манга</a>
+                <a class="dropdown-item" href="/admin-panel/compose-liveaction">Игрален</a>
+                <a class="dropdown-item" href="/admin-panel/compose-game">Игра</a>
+              </div>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">РЕДАКТИРАЙ</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">ИЗТРИЙ</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="my-2 text-center">
+        <% if(locals.user) { %>
+          <% if(user.avatar[0] === undefined){ %>
+            <img class="profile-avatar" src="/images/main/default-avatar.jpg">
+          <% } else { %>
+            <img class="profile-avatar" src="/images/uploads/<%= user.avatar[0].filename %>">
+          <% } %>
+          <h5 class="d-block"><%= user.username %></h5>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>

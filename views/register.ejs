@@ -1,0 +1,60 @@
+<%- include('partials/header'); -%>
+<%- include('partials/menu'); -%>
+<%- include('partials/image-slider'); -%>
+
+
+  <div class="container-md content">
+    <div class="col-lg-9 border border-top-0 border-bottom-0 border-left-0" style="min-height: 100vh; padding: 15px;">
+      <% if(locals.errors){ %>
+        <% Object.values(errors).forEach(function(error){ %>
+        <div class="alert alert-danger">
+        <%= error.msg %>
+        </div>
+        <% }) %>
+      <% } %>
+      <%- messages('message', locals) %>
+      <div class="border p-3">
+        <h3>Нов профил</h3>
+        <form class="log-reg-form" action="/users/register" method="post">
+          <div class="form-group">
+            <label>Потребителско име:</label>
+            <input class="form-control" type="text" name="username">
+          </div>
+          <div class="form-group row">
+            <div class="col">
+              <label>Парола:</label>
+              <input class="form-control" type="password" name="password">
+            </div>
+            <div class="col">
+              <label>Потвърдете паролата:</label>
+              <input class="form-control" type="password" name="passwordTwo">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col">
+              <label>Имейл:</label>
+              <input class="form-control" type="email" name="email">
+            </div>
+            <div class="col">
+              <label>Потвърдете имейла:</label>
+              <input class="form-control" type="email" name="emailTwo">
+            </div>
+          </div>
+          <div class="text-center">
+            <button class="btn btn-lg btn-primary font-weight-bold pr-4 pl-4" type="submit">РЕГИСТРАЦИЯ</button>
+          </div>
+        </form>
+        <div class="p-3">
+          <a href="/users/login" class="side-buttons" style="float: left;">Вече сте регистриран?</a>
+          <span class="side-buttons" style="float: right;">Забравена парола?</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-side">
+
+  </div>
+</div>
+<br>
+<%- include('partials/footer'); -%>

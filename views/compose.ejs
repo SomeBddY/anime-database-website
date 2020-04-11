@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="bg" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/css/adm-panel.css">
+    <title>Качи нов проект</title>
+  </head>
+  <body>
+    <img class="logo" src="/images/main/OtakuBGBanner.png">
+    <div class="container">
+      <img class="import" src="/images/main/import.png">
+      <form action="/compose" method="post" enctype="multipart/form-data">
+        <label>Постер:</label>
+        <input type="file" name="file" accept="image/*" onchange="loadFile(event)">
+        <img class="output-image" id="output">
+        <script>
+          var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+          };
+        </script>
+        <label>Заглавие:</label>
+        <input type="text" name="title">
+        <label>Жанр:</label>
+        <input type="text" name="genre">
+        <label>Тип:</label>
+        <input type="text" name="format">
+        <label>Епизоди:</label>
+        <input type="text" name="episodes">
+        <label>Година:</label>
+        <input type="text" name="year">
+        <label>Времетраене:</label>
+        <input type="text" name="duration">
+        <label>Държава:</label>
+        <input type="text" name="state">
+        <label>Студио:</label>
+        <input type="text" name="studio">
+        <label>Продукция:</label>
+        <input type="text" name="producer">
+        <label>Трейлър:</label>
+        <input type="text" name="trailer">
+        <label>Описание:</label>
+        <textarea name="summary" rows="10" cols="70"></textarea>
+        <button type="submit" name="button">ПУБЛИКУВАЙ</button>
+      </form>
+    </div>
+  </body>
+</html>

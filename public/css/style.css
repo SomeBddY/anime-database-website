@@ -1,0 +1,408 @@
+ html body {
+  font-family: Arial;
+  background-image: url('/images/main/background3.jpg');
+  background-color: black;
+  background-size: contain, cover;
+  font-size: 15px;
+  white-space: normal;
+}
+.btn-outline-dark {
+  border-radius: 8px !important;
+}
+
+.user-menu {
+  display: flex;
+}
+
+.menu-username-container {
+  justify-content: center;
+}
+
+.menu-username {
+  color: black;
+  font-family: Roboto, sans-serif;
+  transition: 0.3s;
+}
+
+.menu-avatar-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.menu-avatar-container img {
+}
+
+.menu-avatar {
+  max-width: 40px;
+  max-height: 40px;
+  margin: auto;
+}
+
+.menu-username:hover {
+  color: #ed7900;
+  text-decoration: none;
+}
+
+.menu-navbar{
+  background-color: #2a4889;
+  z-index: 3;
+}
+
+.nav-link {
+  color: white;
+}
+
+.navbar li a{
+  font-family: Roboto, sans-serif;
+  padding: 20px;
+  margin: -7px 0;
+  font-weight: bold;
+  transition: 0.5s;
+}
+
+@media screen and (max-width: 960px) {
+  .navbar li a {
+    margin: 0;
+  }
+  .navbar li form {
+    margin-left: 0 !important;
+  }
+}
+
+.nav-link {
+    margin: 0;
+}
+
+.navbar li a:hover{
+  color: black;
+}
+
+.drpdwn-menu{
+	position: absolute;
+	background-color: white;
+  text-decoration: none;
+	opacity: 0;
+  margin: 7px 0;
+  transition: all 0.3s ease;
+  transform: scaleY(0);
+  transform-origin: top;
+}
+
+.navbar .drpdwn-menu a{
+  color: black;
+  font-weight: normal;
+	position: relative;
+  margin: 0;
+	padding: 7px 29px;
+  border-bottom: 1px solid #a9a9a9;
+}
+
+.drpdwn-menu a:last-child{
+  border-bottom: none;
+}
+
+.drpdwn:hover .drpdwn-menu{
+	opacity: 0.9;
+	transform: scaleY(1);
+}
+
+.drpdwn-menu a:hover{
+  background-color: #404040;
+}
+
+.btn-warning, .btn-outline-warning, .btn-warning:active, .btn-warning-visited {
+  background-color: #ed7900 !important;
+  border: 1px solid #ed7900 !important;
+}
+
+.btn-warning:hover, .btn-outline-warning:hover {
+  background-color: #ff9628 !important;
+  border: 1px solid #ff9628 !important;
+}
+
+.imageSlider{
+  padding: 0 !important;
+  background-color: #333333;
+  border: 10px solid #fff;
+  border-radius: 10px;
+  z-index: 1;
+}
+
+.textboxes{
+  position: absolute;
+  height: 40px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 10;
+  color: #fff;
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.5);
+  font-family: Arial;
+  font-size: 1.5vw;
+}
+
+
+@media screen and (min-width: 600px) {
+  .textboxes {
+      height: 65px;
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .textboxes {
+      height: 90px;
+  }
+}
+
+
+@media screen and (min-width: 1080px) {
+  .textboxes {
+      font-size: 16px !important;
+  }
+}
+
+.textboxes a{
+  text-decoration: none;
+  color: white;
+}
+
+.textboxes a:hover{
+  color: #ed7900;
+}
+
+.content {
+  background-color: white;
+}
+
+.project-container {
+  float: left;
+}
+
+.project {
+  position: relative;
+  display: inline;
+  font-family: Roboto, sans-serif;
+  padding: 1px;
+  float: left;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.output-project {
+  width: 200px;
+  height: 270px;
+  float: left;
+}
+
+.text-caption {
+  font-size: 9px;
+}
+
+.project-overlay {
+  position: absolute;
+  margin: auto;
+  width: 200px;
+  height: 270px;
+  background: rgba(0, 0, 0, 0.7);
+  text-align: center;
+  color: white;
+  opacity: 0;
+  white-space: normal;
+  transition: 0.5s ease;
+  z-index: 5;
+}
+
+.project-overlay:hover {
+  opacity: 1;
+}
+
+.project-overlay a{
+  position: relative;
+  top: 100px;
+  transition: 0.3s;
+}
+
+.project-overlay a:hover {
+  opacity: 0.6;
+}
+
+.pagination {
+  position: relative;
+  text-align: center;
+  padding: 15px 0px 5px 0px;
+  clear: both;
+}
+
+.pagination a {
+  text-decoration: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  border: none;
+}
+
+.project-description {
+  background-color: #f2f2f2;
+}
+
+.project-description th{
+  background-color: #2a4889;
+  color: white;
+}
+
+.project-description td{
+  border-bottom: 1px solid #8c8c8c;
+}
+
+.project-description tr:last-child td{
+  border-bottom: none;
+}
+
+.output-single-project {
+  width: 260px;
+}
+
+.project-title {
+  color: black;
+  transition: 0.3s ease;
+}
+
+.project-title:hover {
+  color: #ed7900;
+  text-decoration: none;
+}
+
+.comment-avatar {
+  width: 50px;
+  border-radius: 50%;
+}
+
+.comment-more {
+  color: black;
+  transition: 0.3s ease;
+}
+
+.comment-more:hover {
+  color: #ed7900;
+  text-decoration: none;
+}
+
+.comment-username {
+  color: black;
+  transition: 0.3s ease;
+}
+
+.comment-username:hover {
+  color: #ed7900;
+  text-decoration: none;
+}
+
+.log-reg-form{
+  position: relative;
+  background-color: #333333;
+  color: white;
+  padding: 15px;
+}
+
+.side-buttons{
+  cursor: pointer;
+  transition: 0.2s;
+  line-height: 10px;
+  text-decoration: none !important;
+  color: #000000;
+}
+
+.side-buttons:hover{
+  color: #ff9628;
+}
+
+.edit-img-btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  color: white;
+  height: 0;
+  text-align: center;
+  cursor: pointer;
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+.edit-img-btn a {
+  background-color: #000000;
+  padding: 20px;
+  border-radius: 50%;
+}
+
+.edit-img-btn:hover {
+  opacity: 0.7;
+}
+
+.avatar-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-avatar {
+  margin: auto;
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.profile-username {
+  font-family: Roboto, sans-serif;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.user-status {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+}
+
+.online {
+  background-color: green;
+}
+
+.arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid #2a4889;
+}
+
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #f8f9fa;
+}
+
+.side-content {
+  background-color: #2a4889;
+}
+
+footer{
+  color: white;
+  background-color: #2a4889;
+  text-align: center;
+  font-size: 12px;
+  line-height: 3;
+}

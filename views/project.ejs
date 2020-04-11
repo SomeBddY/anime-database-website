@@ -1,0 +1,103 @@
+<%- include('partials/header'); -%>
+<%- include('partials/menu'); -%>
+<%- include('partials/image-slider'); -%>
+
+    <div class="container-md content clearfix">
+      <div class="row">
+        <div class="col-lg-9 border border-top-0 border-bottom-0 border-left-0" style="min-height: 100vh; padding: 15px;">
+          <table class="table project-description">
+            <tr>
+              <th rowspan="11"><img class="output-single-project" src="/images/uploads/<%= image_file %>"></th>
+            </tr>
+            <tr>
+              <td>Заглавие</td>
+              <td><%= title %></td>
+            </tr>
+            <tr>
+              <td>Жанр</td>
+              <td> <%= genre %></td>
+            </tr>
+            <tr>
+              <td>Тип</td>
+              <td><%= format %></td>
+            </tr>
+            <tr>
+              <td>Епизоди</td>
+              <td><%= episodes %></td>
+            </tr>
+            <tr>
+              <td>Година</td>
+              <td><%= year %></td>
+            </tr>
+            <tr>
+              <td>Времетраене</td>
+              <td><%= duration %></td>
+            </tr>
+            <tr>
+              <td>Държава</td>
+              <td><%= state %></td>
+            </tr>
+            <tr>
+              <td>Студио</td>
+              <td><%= studio %></td>
+            </tr>
+            <tr>
+              <td>Продукция</td>
+              <td><%= producer %></td>
+            </tr>
+            <tr>
+              <td>Рейтинг</td>
+              <td style="border-bottom: none">
+                <form action="/projects/<%= projectId %>" method="post">
+                  <% if(ratings.length === 0){ %>
+                    <span>n/a</span>
+                  <% } else { %>
+                    <% let sumVotes = 0 %>
+                    <% ratings.forEach(function(vote) { %>
+                      <% sumVotes += vote.rating %>
+                    <% }) %>
+                    <span><%= (sumVotes/count).toFixed(2) %></span>
+                    <span>(<%= count %>)</span>
+                  <% } %>
+                  <% if(locals.user) { %>
+                  <select id="select-rating" name="rating">
+                    <option value="0">Избери оценка</option>
+                    <option value="1">(1)Ужас</option>
+                    <option value="2">(2)Много слабо</option>
+                    <option value="3">(3)Зле</option>
+                    <option value="4">(4)Бива</option>
+                    <option value="5">(5)Средно</option>
+                    <option value="6">(6)Добро</option>
+                    <option value="7">(7)Много добро</option>
+                    <option value="8">(8)Супер</option>
+                    <option value="9">(9)Жестоко</option>
+                    <option value="10">(10)Шедьовър</option>
+                  </select>
+                  <input id="rate-btn" class="btn btn-sm btn-dark" type="submit" value="Гласувай">
+                  <% } %>
+                </form>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3" style="text-align: center">Резюме</td>
+            </tr>
+            <tr>
+              <td colspan="3"><p style="white-space: pre-wrap"><%= summary %></p></td>
+            </tr>
+          </table>
+          <br>
+          <iframe style="border: none" src="<%= trailer %>" width="100%" height="450px"></iframe>
+          <div class="text-center">
+            <% if(locals.user && locals.user.role === 'admin'){ %>
+              <a class="btn btn-light" href="/projects/edit/<%= projectId %>">Редактирай</a>
+            <% } %>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-lg-3">
+
+      </div>
+    </div>
+    <br>
+<%- include('partials/footer'); -%>
